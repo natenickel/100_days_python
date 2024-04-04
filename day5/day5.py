@@ -11,18 +11,18 @@ nr_numbers = int(input(f"How many numbers would you like?\n"))
 
 password = ""
 
-for letter_keys in range(0,nr_letters):
-    randomizer = random.randint(0, 25)
-    password += letters[randomizer]
+for letter_keys in range(0, nr_letters):
+    random_char = random.choice(letters)
+    password += random_char
 
 for number_keys in range(0, nr_numbers):    
-    randomizer = random.randint(0, 9)
-    password += numbers[randomizer]
+    random_char = random.choice(numbers)
+    password += random_char
 
 for symbol_keys in range(0, nr_symbols):    
-    randomizer = random.randint(0, 8)
-    password += symbols[randomizer]
-    
+    random_char = random.choice(symbols)
+    password += random_char
+
 password = password
 final_password = ""
 
