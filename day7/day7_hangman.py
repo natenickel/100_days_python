@@ -1,66 +1,12 @@
 #Step 4
 
 import random
+from hangman_art import stages, logo
+from hangman_words import word_list
 
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
 
 end_of_game = False
-word_list = ["ardvark", "baboon", "camel"]
+
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
 
@@ -68,15 +14,17 @@ word_length = len(chosen_word)
 #Set 'lives' to equal 6.
 
 #Testing code
-print(f'Pssst, the solution is {chosen_word}.')
+print(logo)
 
 #Create blanks
 display = []
+wrong_answers = []
 for _ in range(word_length):
     display += "_"
 stickman_pos = 6
+print(display)
 while not end_of_game:
-    print(stages[stickman_pos])
+    
     guess = input("Guess a letter: ").lower()
     lose_a_life = True
     #Check guessed letter
@@ -84,11 +32,12 @@ while not end_of_game:
         letter = chosen_word[position]
         if letter == guess:
             display[position] = letter
-            lose_a_life = False
-    if lose_a_life == True:
-        stickman_pos -= 1
-
-
+    if guess not in chosen_word:
+        wrong_answers += guess
+        stickman_pos -= 1    
+    
+    print(stages[stickman_pos])
+    print(wrong_answers)
     #TODO-2: - If guess is not a letter in the chosen_word,
     #Then reduce 'lives' by 1. 
     #If lives goes down to 0 then the game should stop and it should print "You lose."
@@ -101,6 +50,7 @@ while not end_of_game:
         end_of_game = True
         print(stages[stickman_pos])
         print(display)
+        print(f"the word was {chosen_word}")
         print("You Lose")
 
 #Check if user has got all letters.
